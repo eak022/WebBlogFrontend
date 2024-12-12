@@ -6,7 +6,7 @@ import blogData from '../../db.json';
 const BlogCard = ({ blog, onClick }) => {
   return (
     <div
-      className="card w-96 bg-white shadow-lg mb-6 cursor-pointer"
+      className="card w-96 bg-white shadow-lg mb-6  cursor-pointer "
       onClick={() => onClick(blog.id)} // คลิกเพื่อขยายการ์ด
     >
       <img
@@ -42,7 +42,7 @@ const Home = () => {
     <div className="container mx-auto p-6">
       <h2 className="text-3xl font-bold text-center mb-8">Blog Home</h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
         {blogs.map((blog) => (
           <BlogCard
             key={blog.id}

@@ -1,29 +1,35 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // นำเข้า useNavigate
+import { useNavigate } from "react-router-dom";
+import AuthService from "../services/auth.service";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // ใช้ useNavigate เพื่อเปลี่ยนเส้นทาง
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // แทนที่ด้วยฟังก์ชันการล็อกอินของคุณ
-    console.log("Logging in with", { username, password });
+    try {
+      const response = await AuthService.login(username, password);
+      console.log("Login successful:", response.data);
+      navigate("/"); // ไปที่หน้าหลังล็อกอินสำเร็จ
+    } catch (err) {
+      console.error("Login failed:", err.response?.data || err.message);
+      setError(err.response?.data?.message || "Login failed. Please try again.");
+    }
   };
 
   const handleCancel = () => {
-    navigate("/"); // เมื่อกด Cancel จะไปหน้าหลัก (/)
+    navigate("/");
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="card w-96 bg-white shadow-lg p-6">
-        {/* Title */}
         <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
-
-        <div className="container mx-auto">
-          {/* Username Input */}
+        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+        <form onSubmit={handleSubmit}>
           <label className="input input-bordered flex items-center gap-2 w-full mb-4">
             <input
               type="text"
@@ -32,10 +38,9 @@ const Login = () => {
               onChange={(e) => setUsername(e.target.value)}
               className="grow"
               placeholder="Username"
+              required
             />
           </label>
-
-          {/* Password Input */}
           <label className="input input-bordered flex items-center gap-2 w-full mb-4">
             <input
               type="password"
@@ -44,19 +49,18 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               className="grow"
               placeholder="Password"
+              required
             />
           </label>
-
-          {/* Buttons for submit and cancel */}
           <div className="flex gap-2">
-            <button className="btn btn-outline btn-primary grow" onClick={handleSubmit}>
+            <button type="submit" className="btn btn-outline btn-primary grow">
               Login
             </button>
-            <button className="btn btn-outline btn-warning grow" onClick={handleCancel}>
+            <button type="button" className="btn btn-outline btn-warning grow" onClick={handleCancel}>
               Cancel
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
