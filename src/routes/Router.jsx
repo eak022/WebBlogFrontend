@@ -6,6 +6,7 @@ import PostDetail from "../pages/PostDetail";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import MainLayout from "../layouts/MainLayout";
+import PostByAuthor from "../pages/PostByAuthor";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,11 @@ const router = createBrowserRouter([
         path: "post/:id",
         element: <PostDetail />,
       },
+      {
+        path: "author/:id",
+        element: <PostByAuthor />,
+      },
+      
     ],
   },
 ]);

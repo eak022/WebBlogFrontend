@@ -17,6 +17,10 @@ const getPostById = async (id) => {
   return await api.get(`${API_URL}/${id}`);
 };
 
+const getPostByAuthor = async (id) =>{
+  return await api.get(`${API_URL}/author/${id}`)
+}
+
 const DeleteById = async (id) => {
   return await api.delete(`${API_URL}/${id}`);
 };
@@ -28,6 +32,7 @@ const PostService = {
   createPost,
   getPosts,
   getPostById,
+  getPostByAuthor,
   DeleteById,
   updatePost,
 };
