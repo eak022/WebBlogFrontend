@@ -15,7 +15,7 @@ const Post = ({ title, author, summary, cover, createdAt, _id }) => {
     >
       <figure className="md:w-1/2 flex items-center justify-center">
         <img
-          src={`${baseURL}/${cover}`}
+          src={`${cover}`}
           alt={title}
           className="w-full h-64 object-cover"
         />
