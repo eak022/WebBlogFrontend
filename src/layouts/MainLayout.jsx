@@ -15,7 +15,7 @@ const MainLayout = () => {
         <Outlet />
       </main>
 
-      <footer className="py-6 shadow-lg mt-auto">
+      <footer className="shadow-lg ">
         <Footer />
       </footer>
     </div>
