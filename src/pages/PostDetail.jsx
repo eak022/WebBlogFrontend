@@ -94,7 +94,7 @@ const PostDetail = () => {
           </div>
         )}
         <img
-          src={`${baseURL}/${postDetail.cover}`}
+          src={`${postDetail.cover}`}
           alt={postDetail.title}
           className="w-full h-64 object-cover mb-4"
         />
